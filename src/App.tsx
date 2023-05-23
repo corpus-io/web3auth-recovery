@@ -1,11 +1,17 @@
 import React from "react";
 import { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import ThresholdKey from "@tkey/default";
 
 function App() {
   const [secretMessage, setSecretMessage] = useState<string>("Hello World");
   const [message, setMessage] = useState<string>("Hello World");
+  const [tkey, setTkey] = useState<ThresholdKey>();
+
+  function initTKey() {
+    const tkey = new ThresholdKey();
+    setTkey(tkey);
+  }
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
@@ -23,7 +29,7 @@ function App() {
       <header className="App-header">
         <form onSubmit={handleSubmit}>
           <label>
-            Secret 1
+            Secret 1:
             <input
               id="message"
               value={secretMessage}
