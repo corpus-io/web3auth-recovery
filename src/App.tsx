@@ -1,8 +1,9 @@
-import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import "./App.css";
 import BN from "bn.js";
 import { lagrangeInterpolation } from "./recover";
+import { ethers } from "ethers";
 
 function App() {
   const [keyShare, setKeyShare] = useState("");
@@ -10,6 +11,7 @@ function App() {
   const [keyShares, setKeyShares] = useState<BN[]>([]);
   const [indexes, setIndexes] = useState<BN[]>([]);
   const [privateKey, setPrivateKey] = useState<BN>();
+  const [ethAddress, setEthAddress] = useState("");
 
   function handleSubmit(event: any) {
     event.preventDefault();
@@ -66,6 +68,18 @@ function App() {
     //   console.log("Private key not found");
     // }
   }
+
+  useEffect(() => {
+    if (!privateKey) {
+      return;
+    }
+    try {
+      const address = ethers.computeAddress("0x" + privateKey.toString("hex"));
+      setEthAddress(address);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [privateKey]);
 
   return (
     <div className="App">
@@ -127,6 +141,9 @@ function App() {
                 privateKey:
                 "dc146f1a3f4ae942d14ce82676c30b8cc933f0149e807e802b6f2039452083a9"
               </li>
+              <li>
+                Ethereum Address: 0x97dA24fF2a92C94Db0535cf8D20FcA0Ab6dB9876
+              </li>
             </ul>
           </ul>
         </div>
@@ -166,7 +183,7 @@ function App() {
         {privateKey && (
           <div>
             <p>Private Key: {privateKey.toString("hex")}</p>
-            <p>Corresponding address: </p>
+            <p>Corresponding address: {ethAddress}</p>
           </div>
         )}
         <p>
