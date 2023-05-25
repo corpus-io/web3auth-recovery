@@ -115,71 +115,34 @@ function App() {
     let shares: BN[] = [];
     let indexes: BN[] = [];
 
-    // const secrets = [
-    //   "66632f27e450beb22638602ce8e1063ef860edf7fa29c3afff11ba757cfa6619",
-    //   "219733a69292fa302f52b7b2dbdc056c9bdc182ae33304c631b5f6e7e74425c1",
-    // ];
+    // secrets for
+    // polynomialID:"020a4557aca651b4078e9a73ecd8af3ed87ca057da31dd91e26f9c9e8262ed43da|02663c58290b1862534ff2a3dd2297a6da4d82cba176908ce5f5973922182d1751"
+    // extracted from browser
+    const deviceShareSecret =
+      "b6dac735ebfa40ef58031382071ae60c738ac693e0f2c542e3b4f5e7d9e367a4";
+    const deviceShareIndex =
+      "6def503eea5d321c285abdcd385c0451f2b6acd0d05c522c7e3c032e0de9fb4b";
 
-    // // randomly assign integer indexes between -100 and 100 to each secret and store them in an array
-    // const iMax = 100
-    // for (let i = 1; i < iMax; i++) {
-    //   shares.push(new BN(secrets[i], "hex"));
-    //   indexes.push(new BN(i));
-    // }
+    const providerShareSecret =
+      "dd819ae466a9a6e3e297aa629caa405af31f7806c8a48677ed6c55c0c8e64e34";
+    const providerShareIndex = "1";
 
-    // this should be the service provider share, which generally has the index 1
-    shares.push(
-      new BN(
-        "66632f27e450beb22638602ce8e1063ef860edf7fa29c3afff11ba757cfa6619",
-        "hex"
-      )
-    );
-    indexes.push(new BN(1));
-
-    shares.push(
-      new BN(
-        "219733a69292fa302f52b7b2dbdc056c9bdc182ae33304c631b5f6e7e74425c1",
-        "hex"
-      )
-    );
-    indexes.push(new BN(2));
-
-    // here, we know the real private key
-    const realPrivateKey = new BN(
-      "d49341ca70c2b1a06f49ecc5aa0d23a39808a4316e1b60ba6eec288d26659586",
+    const privateKey = new BN(
+      "dc146f1a3f4ae942d14ce82676c30b8cc933f0149e807e802b6f2039452083a9",
       "hex"
     );
 
-    const iMax = 100;
-    let wasPrivateKeyFound = false;
-    console.log("Starting to search for the index");
-    for (let j = -iMax; j < iMax; j++) {
-      for (let i = -iMax; i < iMax; i++) {
-        if (i === j || i === 0 || j === 0) {
-          continue;
-        }
-        indexes[0] = new BN(j);
-        indexes[1] = new BN(i);
-        const privateKey = lagrangeInterpolation(shares, indexes);
-        if (privateKey.eq(realPrivateKey)) {
-          console.log("Found the index: ", i);
-          console.log("Found the private key: ", privateKey.toString("hex"));
-          wasPrivateKeyFound = true;
-          break;
-        }
-      }
-      if (wasPrivateKeyFound) {
-        break;
-      }
-    }
+    shares.push(new BN(deviceShareSecret, "hex"));
+    indexes.push(new BN(deviceShareIndex, "hex"));
+    shares.push(new BN(providerShareSecret, "hex"));
+    indexes.push(new BN(providerShareIndex, "hex"));
 
-    if (!wasPrivateKeyFound) {
+    const calculatedPrivateKey = lagrangeInterpolation(shares, indexes);
+    if (calculatedPrivateKey.eq(privateKey)) {
+      console.log("Found the private key: ", privateKey.toString("hex"));
+    } else {
       console.log("Private key not found");
     }
-
-    // const privateKey = lagrangeInterpolation(shares, indexes);
-
-    // console.log(privateKey.toString("hex"));
   }
 
   return (
