@@ -115,13 +115,26 @@ function App() {
     let shares: BN[] = [];
     let indexes: BN[] = [];
 
+    // const secrets = [
+    //   "66632f27e450beb22638602ce8e1063ef860edf7fa29c3afff11ba757cfa6619",
+    //   "219733a69292fa302f52b7b2dbdc056c9bdc182ae33304c631b5f6e7e74425c1",
+    // ];
+
+    // // randomly assign integer indexes between -100 and 100 to each secret and store them in an array
+    // const iMax = 100
+    // for (let i = 1; i < iMax; i++) {
+    //   shares.push(new BN(secrets[i], "hex"));
+    //   indexes.push(new BN(i));
+    // }
+
+    // this should be the service provider share, which generally has the index 1
     shares.push(
       new BN(
         "66632f27e450beb22638602ce8e1063ef860edf7fa29c3afff11ba757cfa6619",
         "hex"
       )
     );
-    indexes.push(new BN(2));
+    indexes.push(new BN(1));
 
     shares.push(
       new BN(
@@ -129,11 +142,44 @@ function App() {
         "hex"
       )
     );
-    indexes.push(new BN(3));
+    indexes.push(new BN(2));
 
-    const privateKey = lagrangeInterpolation(shares, indexes);
+    // here, we know the real private key
+    const realPrivateKey = new BN(
+      "d49341ca70c2b1a06f49ecc5aa0d23a39808a4316e1b60ba6eec288d26659586",
+      "hex"
+    );
 
-    console.log(privateKey.toString("hex"));
+    const iMax = 100;
+    let wasPrivateKeyFound = false;
+    console.log("Starting to search for the index");
+    for (let j = -iMax; j < iMax; j++) {
+      for (let i = -iMax; i < iMax; i++) {
+        if (i === j || i === 0 || j === 0) {
+          continue;
+        }
+        indexes[0] = new BN(j);
+        indexes[1] = new BN(i);
+        const privateKey = lagrangeInterpolation(shares, indexes);
+        if (privateKey.eq(realPrivateKey)) {
+          console.log("Found the index: ", i);
+          console.log("Found the private key: ", privateKey.toString("hex"));
+          wasPrivateKeyFound = true;
+          break;
+        }
+      }
+      if (wasPrivateKeyFound) {
+        break;
+      }
+    }
+
+    if (!wasPrivateKeyFound) {
+      console.log("Private key not found");
+    }
+
+    // const privateKey = lagrangeInterpolation(shares, indexes);
+
+    // console.log(privateKey.toString("hex"));
   }
 
   return (
