@@ -3,16 +3,20 @@ import BN from "bn.js";
 import { ec as EC } from "elliptic";
 const ecCurve: EC = new EC("secp256k1");
 
+/**
+ * This function was taken from https://github.com/tkey/tkey/blob/master/packages/core/src/lagrangeInterpolatePolynomial.ts#L82
+ * and adapted
+ * @param shares secrets corresponding to the y values of points on the polynomial
+ * @param nodeIndex corresponding x values of points on the polynomial
+ * @returns evaluation of the polynomial at 0
+ */
+
 export function lagrangeInterpolation(shares: BN[], nodeIndex: BN[]): BN {
   if (shares.length !== nodeIndex.length) {
     throw Error(
       "shares not equal to nodeIndex length in lagrangeInterpolation"
     );
   }
-
-  // prepare curve
-  //const ecCurve = new EC("n"); //("secp256k1");
-  //const n = ecCurve.curve.n;
 
   let secret = new BN(0);
   for (let i = 0; i < shares.length; i += 1) {

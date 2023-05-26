@@ -15,7 +15,9 @@ Some information is given in the UI. This includes a working example.
 
 ## credits
 
-hacked by malteish in 2023
+Hacked for [tokenize.it](https://www.tokenize.it/) by [malteish](https://github.com/malteish) in 2023.
+
+Relevant code (e.g. in recover.ts) was taken from [web3auth's](https://web3auth.io) Shamir's secret sharing scheme [implementation](https://github.com/tkey/tkey/blob/master/packages/core/src/lagrangeInterpolatePolynomial.ts#L82).
 
 ## license
 
