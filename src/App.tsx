@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import {
   Box,
-  Flex,
+  Link,
   Heading,
   Button,
   UnorderedList,
@@ -10,7 +10,6 @@ import {
   Text,
   HStack,
   VStack,
-  StackDivider,
   InputGroup,
   FormControl,
   FormLabel,
@@ -83,11 +82,61 @@ function App() {
         <VStack width="100%">
           <Box>
             <Heading>Shamir's Secret Sharing Scheme recovery</Heading>
-            <h3>
-              {" "}
+            {/* <Heading as="h3" size="md">
               as implemented by{" "}
-              <a href="https://web3auth.io/tech">web3auth.io</a>
-            </h3>
+            </Heading> */}
+            <Text>
+              <Link
+                textDecoration={"underline"}
+                href="https://web3auth.io/tech"
+              >
+                Web3auth.io
+              </Link>{" "}
+              uses Shamir's secret sharing scheme to distribute key shares and
+              later reconstruct a private key. This tool reverse engineers the
+              reconstruction of the private key.
+            </Text>
+            <Heading as="h3" size="md">
+              Credits
+            </Heading>
+            Most of the code is taken from web3auth.io's{" "}
+            <Link
+              textDecoration={"underline"}
+              href="https://github.com/tkey/tkey/blob/master/packages/core/src/lagrangeInterpolatePolynomial.ts#L82"
+            >
+              implementation of the lagrange interpolation
+            </Link>
+            , or other places of the{" "}
+            <Link
+              textDecoration={"underline"}
+              href="https://github.com/tkey/tkey"
+            >
+              tkey repository.
+            </Link>
+            . Alterations and some wrapper code provided by{" "}
+            <Link
+              textDecoration={"underline"}
+              href="https://github.com/malteish"
+            >
+              malteish
+            </Link>
+            .
+            <Heading as="h3" size="md">
+              License
+            </Heading>
+            <Text>
+              This tool is licensed under the{" "}
+              <Link
+                textDecoration={"underline"}
+                href="https://opensource.org/licenses/MIT"
+              >
+                MIT license
+              </Link>
+              , just like the works it is based on.
+            </Text>
+            <Heading as="h3" size="md">
+              How to use this tool
+            </Heading>
             <Text>
               Input the number of shares needed for recovery, along with their
               index.{" "}
@@ -116,7 +165,7 @@ function App() {
               </ListItem>
               <ListItem>
                 <Button colorScheme="teal" onClick={handleToggle}>
-                  show example
+                  show example values
                 </Button>
               </ListItem>
               <Collapse in={show}>
