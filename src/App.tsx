@@ -13,7 +13,6 @@ import {
   VStack,
   InputGroup,
   FormControl,
-  FormLabel,
   Input,
 } from "@chakra-ui/react";
 import { Collapse } from "@chakra-ui/transition";
