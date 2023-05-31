@@ -32,6 +32,7 @@ function App() {
   const handleToggle = () => setShow(!show);
 
   function handleSubmit(event: any) {
+    console.log("Handle submit");
     event.preventDefault();
     const _index = event.target.index.value;
     const _keyShare = event.target.secret.value;
@@ -97,7 +98,7 @@ function App() {
             </ListItem>
             <UnorderedList>
               <ListItem>
-                index of the device social recovery share is always 1
+                index of the social recovery share is always 1
               </ListItem>
               <ListItem>
                 index of the other shares are random and too big to guess
@@ -150,35 +151,37 @@ function App() {
           </UnorderedList>
         </Box>
         <VStack>
-          <FormControl onSubmit={handleSubmit}>
-            <InputGroup>
-              <HStack width="80%">
-                <Box>
-                  <FormLabel>
-                    Index
-                    <Input
-                      id="index"
-                      type="text"
-                      value={index}
-                      onChange={(event) => setIndex(event.target.value)}
-                    />
-                  </FormLabel>
-                </Box>
-                <Box>
-                  <FormLabel>
-                    Key share
-                    <Input
-                      id="secret"
-                      type="text"
-                      value={keyShare}
-                      onChange={(event) => setKeyShare(event.target.value)}
-                    />
-                  </FormLabel>
-                </Box>
-                <Button type="submit">Submit</Button>
-              </HStack>
-            </InputGroup>
-          </FormControl>
+          <form onSubmit={handleSubmit}>
+            <FormControl onSubmit={handleSubmit}>
+              <InputGroup>
+                <HStack width="80%">
+                  <Box>
+                    <FormLabel>
+                      Index
+                      <Input
+                        id="index"
+                        type="text"
+                        value={index}
+                        onChange={(event) => setIndex(event.target.value)}
+                      />
+                    </FormLabel>
+                  </Box>
+                  <Box>
+                    <FormLabel>
+                      Key share
+                      <Input
+                        id="secret"
+                        type="text"
+                        value={keyShare}
+                        onChange={(event) => setKeyShare(event.target.value)}
+                      />
+                    </FormLabel>
+                  </Box>
+                  <Button type="submit">Submit</Button>
+                </HStack>
+              </InputGroup>
+            </FormControl>
+          </form>
           <HStack width="80%">
             {/* <StackDivider borderColor="gray.200" /> */}
             <Box width="50%">
