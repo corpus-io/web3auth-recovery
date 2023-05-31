@@ -7,6 +7,13 @@ import {
   UnorderedList,
   ListItem,
   Text,
+  HStack,
+  VStack,
+  StackDivider,
+  InputGroup,
+  FormControl,
+  FormLabel,
+  Input,
 } from "@chakra-ui/react";
 import { Collapse } from "@chakra-ui/transition";
 import "./App.css";
@@ -142,58 +149,68 @@ function App() {
             </Collapse>
           </UnorderedList>
         </Box>
-        <form onSubmit={handleSubmit}>
-          <p>
-            <label>
-              Key share
-              <input
-                id="secret"
-                type="text"
-                value={keyShare}
-                onChange={(event) => setKeyShare(event.target.value)}
-              />
-            </label>
-            <label>
-              Index
-              <input
-                id="index"
-                type="text"
-                value={index}
-                onChange={(event) => setIndex(event.target.value)}
-              />
-            </label>
-            <button type="submit">Submit</button>
-          </p>
-        </form>
-        <p>
-          <button
-            onClick={() => {
-              getPrivateKey(keyShares, indexes, setPrivateKey);
-            }}
-          >
-            Get Private Key
-          </button>
-          <button onClick={reset}>Reset all</button>
-        </p>
-        {privateKey && (
-          <div>
-            <p>Private Key: {privateKey.toString("hex")}</p>
-            <p>Corresponding address: {ethAddress}</p>
-          </div>
-        )}
-        <p>
-          Current secrets:{" "}
-          {keyShares.map((share) => (
-            <p>{share.toString("hex")}</p>
-          ))}
-        </p>
-        <p>
-          Current indexes:{" "}
-          {indexes.map((index) => (
-            <p>{index.toString("hex")}</p>
-          ))}
-        </p>
-        <p></p>
+        <VStack>
+          <FormControl onSubmit={handleSubmit}>
+            <InputGroup>
+              <HStack width="80%">
+                <Box>
+                  <FormLabel>
+                    Index
+                    <Input
+                      id="index"
+                      type="text"
+                      value={index}
+                      onChange={(event) => setIndex(event.target.value)}
+                    />
+                  </FormLabel>
+                </Box>
+                <Box>
+                  <FormLabel>
+                    Key share
+                    <Input
+                      id="secret"
+                      type="text"
+                      value={keyShare}
+                      onChange={(event) => setKeyShare(event.target.value)}
+                    />
+                  </FormLabel>
+                </Box>
+                <Button type="submit">Submit</Button>
+              </HStack>
+            </InputGroup>
+          </FormControl>
+          <HStack width="80%">
+            {/* <StackDivider borderColor="gray.200" /> */}
+            <Box width="50%">
+              Current indexes:{" "}
+              {indexes.map((index) => (
+                <p>{index.toString("hex")}</p>
+              ))}
+            </Box>
+            <Box width="50%">
+              Current secrets:{" "}
+              {keyShares.map((share) => (
+                <p>{share.toString("hex")}</p>
+              ))}
+            </Box>
+          </HStack>
+          <HStack>
+            <Button
+              onClick={() => {
+                getPrivateKey(keyShares, indexes, setPrivateKey);
+              }}
+            >
+              Get Private Key
+            </Button>
+            <Button onClick={reset}>Reset all</Button>
+          </HStack>
+          {privateKey && (
+            <div>
+              <p>Private Key: {privateKey.toString("hex")}</p>
+              <p>Corresponding address: {ethAddress}</p>
+            </div>
+          )}
+        </VStack>
       </header>
     </div>
   );
