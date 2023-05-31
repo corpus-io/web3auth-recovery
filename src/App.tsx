@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import {
   Box,
+  Flex,
   Link,
   Heading,
   Button,
@@ -31,14 +32,9 @@ function App() {
   const [show, setShow] = useState(false);
   const handleToggle = () => setShow(!show);
 
-  function handleSubmit(event: any) {
-    console.log("Handle submit");
-    event.preventDefault();
-    const _index = event.target.index.value;
-    const _keyShare = event.target.secret.value;
-    console.log("secret: ", _keyShare);
-    setKeyShares([...keyShares, new BN(_keyShare, "hex")]);
-    setIndexes([...indexes, new BN(_index, "hex")]);
+  function handleSubmit() {
+    setKeyShares([...keyShares, new BN(keyShare, "hex")]);
+    setIndexes([...indexes, new BN(index, "hex")]);
     setKeyShare("");
     setIndex("");
     console.log("keyShares: ", keyShares);
@@ -174,97 +170,108 @@ function App() {
                 using shares that do not belong to the same polynomial will not
                 fail, but definitely yield a wrong result
               </ListItem>
-              <ListItem>
-                <Button colorScheme="teal" onClick={handleToggle}>
-                  show example values
-                </Button>
-              </ListItem>
-              <Collapse in={show}>
+            </UnorderedList>
+            <Button colorScheme="teal" onClick={handleToggle}>
+              show example values
+            </Button>
+            <Collapse in={show}>
+              <Box border={"1px"} borderRadius={10} p={4} maxW={"fit-content"}>
                 <UnorderedList>
                   <ListItem>
                     deviceShare
                     <UnorderedList>
                       <ListItem>
                         index:
-                        "6def503eea5d321c285abdcd385c0451f2b6acd0d05c522c7e3c032e0de9fb4b"
+                        <pre>
+                          6def503eea5d321c285abdcd385c0451f2b6acd0d05c522c7e3c032e0de9fb4b
+                        </pre>
                       </ListItem>
                       <ListItem>
                         share:
-                        "b6dac735ebfa40ef58031382071ae60c738ac693e0f2c542e3b4f5e7d9e367a4"
+                        <pre>
+                          b6dac735ebfa40ef58031382071ae60c738ac693e0f2c542e3b4f5e7d9e367a4
+                        </pre>
                       </ListItem>
                     </UnorderedList>
                   </ListItem>
                   <ListItem>
                     providerShare
                     <UnorderedList>
-                      <ListItem>index: "1"</ListItem>
+                      <ListItem>
+                        index: <pre>1</pre>
+                      </ListItem>
                       <ListItem>
                         share:
-                        "dd819ae466a9a6e3e297aa629caa405af31f7806c8a48677ed6c55c0c8e64e34"
+                        <pre>
+                          dd819ae466a9a6e3e297aa629caa405af31f7806c8a48677ed6c55c0c8e64e34
+                        </pre>
                       </ListItem>
                     </UnorderedList>
                   </ListItem>
                   <ListItem>
                     privateKey:
-                    "dc146f1a3f4ae942d14ce82676c30b8cc933f0149e807e802b6f2039452083a9"
+                    <pre>
+                      dc146f1a3f4ae942d14ce82676c30b8cc933f0149e807e802b6f2039452083a9
+                    </pre>
                   </ListItem>
                   <ListItem>
-                    Ethereum Address: 0x97dA24fF2a92C94Db0535cf8D20FcA0Ab6dB9876
+                    Ethereum Address:
+                    <pre>0x97dA24fF2a92C94Db0535cf8D20FcA0Ab6dB9876</pre>
                   </ListItem>
                 </UnorderedList>
-              </Collapse>
-            </UnorderedList>
+              </Box>
+            </Collapse>
           </Box>
         </VStack>
-        <VStack>
-          <form onSubmit={handleSubmit}>
-            <FormControl onSubmit={handleSubmit}>
-              <InputGroup>
-                <HStack width="100%">
-                  <Box>
-                    <FormLabel>
-                      Index
-                      <Input
-                        id="index"
-                        type="text"
-                        value={index}
-                        onChange={(event) => setIndex(event.target.value)}
-                      />
-                    </FormLabel>
-                  </Box>
-                  <Box>
-                    <FormLabel>
-                      Key share
-                      <Input
-                        id="secret"
-                        type="text"
-                        value={keyShare}
-                        onChange={(event) => setKeyShare(event.target.value)}
-                      />
-                    </FormLabel>
-                  </Box>
-                  <Button colorScheme="teal" type="submit">
-                    Submit
-                  </Button>
-                </HStack>
-              </InputGroup>
-            </FormControl>
-          </form>
-          <HStack width="100%">
-            {/* <StackDivider borderColor="gray.200" /> */}
-            <Box width="40%">
-              Current indexes:{" "}
-              {indexes.map((index) => (
-                <Text>{index.toString("hex")}</Text>
-              ))}
-            </Box>
-            <Box width="40%">
-              Current key shares:{" "}
-              {keyShares.map((share) => (
-                <Text>{share.toString("hex")}</Text>
-              ))}
-            </Box>
-          </HStack>
+        <VStack mt={10}>
+          <Flex direction="column" width="100%">
+            <InputGroup>
+              <HStack width="100%" alignItems={"start"}>
+                <FormControl>
+                  {/* <FormLabel>Index</FormLabel> */}
+                  <Input
+                    id="index"
+                    type="text"
+                    value={index}
+                    placeholder="Index"
+                    minW="650px"
+                    onChange={(event) => setIndex(event.target.value)}
+                  />
+                  {indexes[0] && (
+                    <Box width="100%">
+                      Current indexes:{" "}
+                      {indexes.map((index) => (
+                        <Text>{index.toString("hex")}</Text>
+                      ))}
+                    </Box>
+                  )}
+                </FormControl>
+                <FormControl>
+                  {/* <FormLabel>Key share</FormLabel> */}
+                  <Input
+                    id="secret"
+                    type="text"
+                    value={keyShare}
+                    placeholder="key share"
+                    minW="650px"
+                    onChange={(event) => setKeyShare(event.target.value)}
+                  />
+                  {keyShares[0] && (
+                    <Box width="100%">
+                      Current key shares:{" "}
+                      {keyShares.map((share) => (
+                        <Text>{share.toString("hex")}</Text>
+                      ))}
+                    </Box>
+                  )}
+                </FormControl>
+                <Button colorScheme="teal" px="10" onClick={handleSubmit}>
+                  Submit
+                </Button>
+              </HStack>
+            </InputGroup>
+          </Flex>
+          <HStack width="100%"></HStack>
           <HStack>
             <Button
               colorScheme="teal"
