@@ -119,6 +119,10 @@ function App() {
               href="https://github.com/malteish"
             >
               malteish
+            </Link>{" "}
+            for{" "}
+            <Link textDecoration={"underline"} href="https://www.tokenize.it/">
+              Tokenize.it
             </Link>
             .
             <Heading as="h3" size="md">
@@ -132,7 +136,14 @@ function App() {
               >
                 MIT license
               </Link>
-              , just like the works it is based on.
+              , just like the works it is based on. The source code can be found{" "}
+              <Link
+                textDecoration={"underline"}
+                href="https://github.com/corpus-io/web3auth-recovery"
+              >
+                here
+              </Link>
+              .
             </Text>
             <Heading as="h3" size="md">
               How to use this tool
