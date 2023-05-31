@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import {
   Box,
+  Flex,
   Heading,
   Button,
   UnorderedList,
@@ -79,82 +80,87 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Box>
-          <Heading>Shamir's Secret Sharing Scheme recovery</Heading>
-          <h3>
-            {" "}
-            as implemented by <a href="https://web3auth.io/tech">web3auth.io</a>
-          </h3>
-          <Text>
-            Input the number of shares needed for recovery, along with their
-            index.{" "}
-          </Text>
-          <UnorderedList>
-            <ListItem>
-              share refers to the y coordinate of the point on the polynomial
-            </ListItem>
-            <ListItem>
-              index refers to the x coordinate of the point on the polynomial
-            </ListItem>
+        <VStack width="100%">
+          <Box>
+            <Heading>Shamir's Secret Sharing Scheme recovery</Heading>
+            <h3>
+              {" "}
+              as implemented by{" "}
+              <a href="https://web3auth.io/tech">web3auth.io</a>
+            </h3>
+            <Text>
+              Input the number of shares needed for recovery, along with their
+              index.{" "}
+            </Text>
             <UnorderedList>
               <ListItem>
-                index of the social recovery share is always 1
+                share refers to the y coordinate of the point on the polynomial
               </ListItem>
               <ListItem>
-                index of the other shares are random and too big to guess
+                index refers to the x coordinate of the point on the polynomial
               </ListItem>
-            </UnorderedList>
-            <ListItem>
-              device share and index can be extracted from browser storage
-            </ListItem>
-            <ListItem>
-              using shares that do not belong to the same polynomial will not
-              fail, but definitely yield a wrong result
-            </ListItem>
-            <ListItem>
-              <Button onClick={handleToggle}>show example</Button>
-            </ListItem>
-            <Collapse in={show}>
               <UnorderedList>
                 <ListItem>
-                  deviceShare
-                  <UnorderedList>
-                    <ListItem>
-                      share:
-                      "b6dac735ebfa40ef58031382071ae60c738ac693e0f2c542e3b4f5e7d9e367a4"
-                    </ListItem>
-                    <ListItem>
-                      index:
-                      "6def503eea5d321c285abdcd385c0451f2b6acd0d05c522c7e3c032e0de9fb4b"
-                    </ListItem>
-                  </UnorderedList>
+                  index of the social recovery share is always 1
                 </ListItem>
                 <ListItem>
-                  providerShare
-                  <UnorderedList>
-                    <ListItem>
-                      share:
-                      "dd819ae466a9a6e3e297aa629caa405af31f7806c8a48677ed6c55c0c8e64e34"
-                    </ListItem>
-                    <ListItem>index: "1"</ListItem>
-                  </UnorderedList>
-                </ListItem>
-                <ListItem>
-                  privateKey:
-                  "dc146f1a3f4ae942d14ce82676c30b8cc933f0149e807e802b6f2039452083a9"
-                </ListItem>
-                <ListItem>
-                  Ethereum Address: 0x97dA24fF2a92C94Db0535cf8D20FcA0Ab6dB9876
+                  index of the other shares are random and too big to guess
                 </ListItem>
               </UnorderedList>
-            </Collapse>
-          </UnorderedList>
-        </Box>
+              <ListItem>
+                device share and index can be extracted from browser storage
+              </ListItem>
+              <ListItem>
+                using shares that do not belong to the same polynomial will not
+                fail, but definitely yield a wrong result
+              </ListItem>
+              <ListItem>
+                <Button colorScheme="teal" onClick={handleToggle}>
+                  show example
+                </Button>
+              </ListItem>
+              <Collapse in={show}>
+                <UnorderedList>
+                  <ListItem>
+                    deviceShare
+                    <UnorderedList>
+                      <ListItem>
+                        index:
+                        "6def503eea5d321c285abdcd385c0451f2b6acd0d05c522c7e3c032e0de9fb4b"
+                      </ListItem>
+                      <ListItem>
+                        share:
+                        "b6dac735ebfa40ef58031382071ae60c738ac693e0f2c542e3b4f5e7d9e367a4"
+                      </ListItem>
+                    </UnorderedList>
+                  </ListItem>
+                  <ListItem>
+                    providerShare
+                    <UnorderedList>
+                      <ListItem>index: "1"</ListItem>
+                      <ListItem>
+                        share:
+                        "dd819ae466a9a6e3e297aa629caa405af31f7806c8a48677ed6c55c0c8e64e34"
+                      </ListItem>
+                    </UnorderedList>
+                  </ListItem>
+                  <ListItem>
+                    privateKey:
+                    "dc146f1a3f4ae942d14ce82676c30b8cc933f0149e807e802b6f2039452083a9"
+                  </ListItem>
+                  <ListItem>
+                    Ethereum Address: 0x97dA24fF2a92C94Db0535cf8D20FcA0Ab6dB9876
+                  </ListItem>
+                </UnorderedList>
+              </Collapse>
+            </UnorderedList>
+          </Box>
+        </VStack>
         <VStack>
           <form onSubmit={handleSubmit}>
             <FormControl onSubmit={handleSubmit}>
               <InputGroup>
-                <HStack width="80%">
+                <HStack width="100%">
                   <Box>
                     <FormLabel>
                       Index
@@ -177,41 +183,46 @@ function App() {
                       />
                     </FormLabel>
                   </Box>
-                  <Button type="submit">Submit</Button>
+                  <Button colorScheme="teal" type="submit">
+                    Submit
+                  </Button>
                 </HStack>
               </InputGroup>
             </FormControl>
           </form>
-          <HStack width="80%">
+          <HStack width="100%">
             {/* <StackDivider borderColor="gray.200" /> */}
-            <Box width="50%">
+            <Box width="40%">
               Current indexes:{" "}
               {indexes.map((index) => (
-                <p>{index.toString("hex")}</p>
+                <Text>{index.toString("hex")}</Text>
               ))}
             </Box>
-            <Box width="50%">
-              Current secrets:{" "}
+            <Box width="40%">
+              Current key shares:{" "}
               {keyShares.map((share) => (
-                <p>{share.toString("hex")}</p>
+                <Text>{share.toString("hex")}</Text>
               ))}
             </Box>
           </HStack>
           <HStack>
             <Button
+              colorScheme="teal"
               onClick={() => {
                 getPrivateKey(keyShares, indexes, setPrivateKey);
               }}
             >
               Get Private Key
             </Button>
-            <Button onClick={reset}>Reset all</Button>
+            <Button colorScheme="teal" onClick={reset}>
+              Reset all
+            </Button>
           </HStack>
           {privateKey && (
-            <div>
-              <p>Private Key: {privateKey.toString("hex")}</p>
-              <p>Corresponding address: {ethAddress}</p>
-            </div>
+            <Box>
+              <Text>Private Key: {privateKey.toString("hex")}</Text>
+              <Text>Corresponding address: {ethAddress}</Text>
+            </Box>
           )}
         </VStack>
       </header>
