@@ -91,7 +91,7 @@ function App() {
             <Heading as="h3" size="md" m={2}>
               Credits
             </Heading>
-            Most of the code is taken from web3auth.io's{" "}
+            Most of the code and expertise is taken from web3auth.io's{" "}
             <Link
               textDecoration={"underline"}
               href="https://github.com/tkey/tkey/blob/master/packages/core/src/lagrangeInterpolatePolynomial.ts#L82"
@@ -105,7 +105,7 @@ function App() {
             >
               tkey repository.
             </Link>
-            . Alterations and some wrapper code provided by{" "}
+            Alterations and some wrapper code provided by{" "}
             <Link
               textDecoration={"underline"}
               href="https://github.com/malteish"
