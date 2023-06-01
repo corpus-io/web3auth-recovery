@@ -13,6 +13,16 @@ yarn start
 
 Some information is given in the UI. This includes a working example.
 
+## deployment
+
+Manual deployment:
+
+```bash
+yarn deploy
+```
+
+Push to `main` branch for automatic deployment.
+
 ## credits
 
 Hacked for [tokenize.it](https://www.tokenize.it/) by [malteish](https://github.com/malteish) in 2023.
