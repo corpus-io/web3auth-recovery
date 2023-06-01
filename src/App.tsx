@@ -74,12 +74,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <VStack width="100%">
+        <VStack width="100%" spacing={600}>
           <Box>
             <Heading>Shamir's Secret Sharing Scheme recovery</Heading>
-            {/* <Heading as="h3" size="md">
-              as implemented by{" "}
-            </Heading> */}
             <Text>
               <Link
                 textDecoration={"underline"}
@@ -91,7 +88,7 @@ function App() {
               later reconstruct a private key. This tool reverse engineers the
               reconstruction of the private key.
             </Text>
-            <Heading as="h3" size="md">
+            <Heading as="h3" size="md" m={2}>
               Credits
             </Heading>
             Most of the code is taken from web3auth.io's{" "}
@@ -120,7 +117,7 @@ function App() {
               Tokenize.it
             </Link>
             .
-            <Heading as="h3" size="md">
+            <Heading as="h3" size="md" m={2}>
               License
             </Heading>
             <Text>
@@ -140,7 +137,7 @@ function App() {
               </Link>
               .
             </Text>
-            <Heading as="h3" size="md">
+            <Heading as="h3" size="md" m={2}>
               How to use this tool
             </Heading>
             <Text>
