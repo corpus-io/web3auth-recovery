@@ -96,15 +96,15 @@ function App() {
               textDecoration={"underline"}
               href="https://github.com/tkey/tkey/blob/master/packages/core/src/lagrangeInterpolatePolynomial.ts#L82"
             >
-              implementation of the lagrange interpolation
+              implementation of the Lagrange interpolation
             </Link>
             , or other places of the{" "}
             <Link
               textDecoration={"underline"}
               href="https://github.com/tkey/tkey"
             >
-              tkey repository.{" "}
-            </Link>
+              tkey repository.
+            </Link>{" "}
             Alterations and some wrapper code provided by{" "}
             <Link
               textDecoration={"underline"}
