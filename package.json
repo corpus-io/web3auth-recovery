@@ -1,6 +1,7 @@
 {
   "name": "web3auth-recover",
   "version": "0.1.0",
+  "homepage": "https://corpus-io.github.io/web3auth-recovery/",
   "private": true,
   "dependencies": {
     "@chakra-ui/react": "^2.6.1",
@@ -40,7 +41,9 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +64,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^5.0.0",
     "react-app-rewired": "^2.2.1"
   }
 }
