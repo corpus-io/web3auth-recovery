@@ -103,7 +103,7 @@ function App() {
               textDecoration={"underline"}
               href="https://github.com/tkey/tkey"
             >
-              tkey repository.
+              tkey repository.{" "}
             </Link>
             Alterations and some wrapper code provided by{" "}
             <Link
