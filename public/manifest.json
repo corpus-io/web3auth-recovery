@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Web3auth recovery",
+  "name": "Recover private key from key shares",
   "icons": [
     {
       "src": "favicon.ico",

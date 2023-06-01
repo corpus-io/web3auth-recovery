@@ -124,7 +124,7 @@ function App() {
               This tool is licensed under the{" "}
               <Link
                 textDecoration={"underline"}
-                href="https://opensource.org/licenses/MIT"
+                href="https://github.com/corpus-io/web3auth-recovery/blob/main/LICENSE"
               >
                 MIT license
               </Link>
