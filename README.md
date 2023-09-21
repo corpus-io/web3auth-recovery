@@ -13,6 +13,10 @@ yarn start
 
 Some information is given in the UI. This includes a working example.
 
+## web interface
+
+The web interface is available [here](https://corpus-io.github.io/web3auth-recovery/).
+
 ## deployment
 
 Manual deployment:
